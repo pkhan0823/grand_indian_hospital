@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parwez Khan | Tech-Alchemist Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #ff003c;
+      --deep-black: #0a0a0b;
+      --tech-green: #00ff9d;
+      --glass: rgba(255, 255, 255, 0.05);
+      --border-red: rgba(255, 0, 60, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--deep-black);
+      color: #e0e0e0;
+      font-family: 'Roboto Mono', monospace;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* --- Animated Background Elements --- */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 50%, #1a0505 0%, #000 100%);
+      overflow: hidden;
+    }
+
+    /* Simulating Space/Stars */
+    .stars {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow: 10vw 20vh 2px #fff, 40vw 10vh 2px #fff, 70vw 80vh 2px #fff, 90vw 30vh 2px #fff;
+      animation: spaceFly 100s linear infinite;
+    }
+
+    /* Greenery/Bio-Tech Scan Line */
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 255, 157, 0.05) 50%, transparent);
+      background-size: 100% 4px;
+      z-index: 10;
+      pointer-events: none;
+      animation: scan 8s linear infinite;
+    }
+
+    /* --- Layout & Typography --- */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle, rgba(255,0,60,0.1) 0%, transparent 70%);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    h1::after {
+      content: 'PARWEZ KHAN';
+      position: absolute;
+      left: 2px;
+      text-shadow: -2px 0 var(--tech-green);
+      top: 0;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+      animation: noise-anim 2s infinite linear alternate-reverse;
+    }
+
+    .subtitle {
+      color: var(--primary-red);
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background: rgba(10, 10, 11, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-red);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--tech-green);
+      text-shadow: 0 0 10px var(--tech-green);
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 5rem auto;
+      padding: 2rem;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      border-left: 5px solid var(--primary-red);
+      padding-left: 15px;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+
+    /* --- Project Cards --- */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--glass);
+      border: 1px solid var(--border-red);
+      padding: 2rem;
+      border-radius: 5px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.1), transparent);
+      transition: 0.5s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--tech-green);
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+    }
+
+    .project-card:hover::before {
+      left: 100%;
+    }
+
+    .skills-tag {
+      display: inline-block;
+      background: rgba(255, 0, 60, 0.1);
+      color: var(--primary-red);
+      padding: 4px 10px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      margin: 5px 5px 0 0;
+      border: 1px solid var(--border-red);
+    }
+
+    /* --- Animations --- */
+    @keyframes spaceFly {
+      from { transform: translateY(0); }
+      to { transform: translateY(-1000px); }
+    }
+
+    @keyframes scan {
+      from { background-position: 0 0; }
+      to { background-position: 0 100%; }
+    }
+
+    @keyframes noise-anim {
+      0% { clip: rect(10px, 9999px, 50px, 0); }
+      20% { clip: rect(80px, 9999px, 90px, 0); }
+      100% { clip: rect(40px, 9999px, 60px, 0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem;
+      border-top: 1px solid var(--border-red);
+      margin-top: 5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid var(--tech-green);
+      color: var(--tech-green);
+      text-decoration: none;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--tech-green);
+      color: var(--deep-black);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animation">
+    <div class="stars"></div>
+    <div class="scan-line"></div>
+  </div>
+
+  <nav>
+    <a href="#about">// About</a>
+    <a href="#skills">// Skills</a>
+    <a href="#projects">// Portfolio</a>
+    <a href="#contact">// Terminal</a>
+  </nav>
+
+  <header>
+    <h1>PARWEZ KHAN</h1>
+    <p class="subtitle">BCA GRADUATE • TECH ENTHUSIAST • CREATIVE DEVELOPER</p>
+    <p style="max-width: 600px; color: #888;">Merging the logic of code with the beauty of nature and the mystery of space.</p>
+  </header>
+
+  <section id="about">
+    <h2>> About_Mission</h2>
+    <p>As a stay-at-home mom and BCA graduate, I specialize in bridge-building: connecting complex <strong>Cloud Architectures</strong> with intuitive <strong>Game Design</strong>. I treat every line of code as a seed—nurturing it from a simple script into a flourishing digital ecosystem.</p>
+  </section>
+
+  <section id="skills">
+    <h2>> Tech_Stack</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3 style="color: var(--tech-green);">Programming</h3>
+        <p>Python, C#, JavaScript, SQL</p>
+        <div class="skills-tag">Advanced Logic</div>
+      </div>
+      <div class="project-card">
+        <h3 style="color: var(--tech-green);">Engines & Tools</h3>
+        <p>Unity, Android Studio, Power BI, Azure</p>
+        <div class="skills-tag">Cloud Ready</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>> Active_Deployments</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Survival Game Prototype</h3>
+        <p>A "Stranger Things" inspired experience built in Unity. Features dynamic lighting and survival mechanics.</p>
+        <div class="skills-tag">Unity</div><div class="skills-tag">C#</div>
+        <br><a href="#" class="btn">Launch Source</a>
+      </div>
+      <div class="project-card">
+        <h3>Library Management</h3>
+        <p>A heavy-duty SQL backend paired with a Python Tkinter GUI for seamless data handling.</p>
+        <div class="skills-tag">Python</div><div class="skills-tag">MySQL</div>
+        <br><a href="#" class="btn">Launch Source</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>> Connect_Terminal</h2>
+    <p>Ready to collaborate on the next digital frontier?</p>
+    <p style="margin-top: 20px;">
+      EMAIL: <span style="color: var(--tech-green);">yourname@email.com</span><br>
+      GITHUB: <span style="color: var(--tech-green);">github.com/yourusername</span>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2026 | Designed for the Future | <span style="color: var(--primary-red);">SYSTEM ONLINE</span></p>
+  </footer>
+
+</body>
+</html>
